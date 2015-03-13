@@ -1,0 +1,51 @@
+01. FrontEnd 부하 설정 추가 (많은 연결수)
+02. filter composition에 서비스 참조 카운터를 적용하지 마세요.
+03. 변경 이력 업데이트
+04. 파일명 오타 수정
+05. Finagle 개발자 가이드 업데이트
+06. 서버당 커넥션 수 제한하는 핸들러 추가, 오버로드되는 경우 유휴 커넥션을 닫는 기능 추가.
+07. 테스트의 구문 이슈들을 수정함.
+08. netty가 open event를 보낸 이후로 서비스 생성을 연기함.
+09. finagle-core에 ShardingService를 추가함.
+10. finagle의 event model에 대해 README에 추가함.
+
+
+01. Add "FrontEnd" stress configuration (ie. lots of connections)
+https://github.com/twitter/finagle/commit/e9a87f6e2d1dfa43b3136b7946e479558ad9a33a
+FrontEnd 부하 설정 추가 (많은 연결수)
+
+02. Don't apply service refcounts on filter composition
+https://github.com/twitter/finagle/commit/1f65058aae245747bf72416a50337e5feed0e618
+filter composition에 서비스 참조 카운터를 적용하지 마세요.
+
+03. update changelog
+https://github.com/twitter/finagle/commit/8d64d78aa0c0eead490cd000715abf34f8636b0f
+변경 이력 업데이트
+
+04. fix typo in file name
+https://github.com/twitter/finagle/commit/957cd8f09980a04007332f4fb260a6dbbbf36c25
+파일명 오타 수정
+
+05. Updated Finagle Developer Guide
+https://github.com/twitter/finagle/commit/db5c7e55ba32eba6925688ec6d7ac2b6cbb8b47a
+Finagle 개발자 가이드 업데이트
+
+06. Add Handler to limit connections per server, add feature to close idle connections when overloaded
+https://github.com/twitter/finagle/commit/5c9f61f2538d1ee1f1eb6f4675b1bc7f12c7b88d
+서버당 커넥션 수 제한하는 핸들러 추가, 오버로드되는 경우 유휴 커넥션을 닫는 기능 추가.
+
+07. Fix some syntax issues in the tests.
+https://github.com/twitter/finagle/commit/91bea66b07ecf79f44e4de8057ca30531c2d7f8d
+테스트의 구문 이슈들을 수정함.
+
+08. postpone the creation of the service until after netty sends an open event
+https://github.com/twitter/finagle/commit/fd9d2e0e0b1b9dd0188961fe184df01f341aa6cd
+netty가 open event를 보낸 이후로 서비스 생성을 연기함.
+
+09. Add ShardingService to finagle-core
+https://github.com/twitter/finagle/commit/165316442e34433bb11e37e6f90a176a080d4f19
+finagle-core에 ShardingService를 추가함.
+
+10. write more in README about finagle's event model
+https://github.com/twitter/finagle/commit/33270ee7500775030d764a399057b3fb0934975c
+finagle의 event model에 대해 README에 추가함.

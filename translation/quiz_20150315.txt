@@ -1,0 +1,55 @@
+01. SSLHandler에서 Netty3Transporter는 handshake 시간초과를 명확히 되어있지 않네요.
+02. 이렇게 설정된 채널이 handshake에 응답하지 않는 리모트와 TCP연결을 시도한다면, 그 채널은 connecting 상태로 무한정 머물러 있을 것입니다.
+03. 이건 다양한 문제를 일으킬 지도 모르는데 제가 알고 있는 한 가지는 FailFastFactory과 관련한 것이다.
+04. FailFastFactory가 시간제한 설정 안한 연결을 시도하면, 리모트 서비스와 오래전에 재연결이 되었다고 해도 영구적인 fail-fast 상태로 들어갈 것입니다.
+05. 참조하세요. Netty4는 재설정할 수 있는 기본 handshake 시간제한이 10초이다.
+불행하게도 Netty3에서는 명시적으로 설정해야 합니다. multi-arg SSLHandler 생성자를 통해 설정하는 것이 유일한 방법이네요.
+06. 멋쟁이, PR 만들수 있겠어요?
+07. 결국 할 수 있겠지만 테스트하고 이런 것들 때문에 알맞은 PR 만드는데 시간이 좀 걸릴거예요.
+08. @sirmax handshake 시간제한 문제는 어떻게 되가고 있어요? 도움이 필요하면 우리한테 편하게 알려줘요.
+09. @sirmax 이 테스트를 보는 것도 좋을 것 같아요. 이것도 SslHandler behaviour 테스트인데 출발점으로 사용할 수 있을거에요.
+10. finagle-core: SSL handshake 시간제한을 유한하게 설정했음. Fixes #345 #346
+
+
+
+No handshake timout on SSLHandler
+https://github.com/twitter/finagle/issues/345
+01. Netty3Transporter does not set explicit handshake timeout on SSLHandler.
+SSLHandler에서 Netty3Transporter는 handshake 시간초과를 명확히 되어있지 않네요.
+
+02. If a channel configured this way establishes TCP connection with a remote that does not respond to a handshake, the channel would get stuck in "connecting" state indefinitely.
+이렇게 설정된 채널이 handshake에 응답하지 않는 리모트와 TCP연결을 시도한다면, 그 채널은 connecting 상태로 무한정 머물러 있을 것입니다.
+
+03. This may cause various problems. One that I'm aware of is with the FailFastFactory.
+이건 다양한 문제를 일으킬 지도 모르는데 제가 알고 있는 한 가지는 FailFastFactory과 관련한 것이다.
+
+04. When FailFastFactory tries to establish a connection it sets no timeouts on its own, thus it could be driven into a permanent fail-fast state, even if the connectivity with the remote service is long ago reestablished.
+FailFastFactory가 시간제한 설정 안한 연결을 시도하면, 리모트 서비스와 오래전에 재연결이 되었다고 해도 영구적인 fail-fast 상태로 들어갈 것입니다.
+
+05. FYI, Netty 4 has a default handshake timeout of 10 seconds that can be overridden.
+Unfortunately, it should be done explicitly in Netty 3, and the only way to do it is via a multi-arg SSLHandler constructor.
+참조하세요. Netty4는 재설정할 수 있는 기본 handshake 시간제한이 10초이다.
+불행하게도 Netty3에서는 명시적으로 설정해야 합니다. multi-arg SSLHandler 생성자를 통해 설정하는 것이 유일한 방법이네요.
+
+06. Rad, can you make a PR?
+멋쟁이, PR 만들수 있겠어요?
+
+07. I can, eventually. But it could take some time to make a proper PR with tests and stuff.
+결국 할 수 있겠지만 테스트하고 이런 것들 때문에 알맞은 PR 만드는데 시간이 좀 걸릴거예요.
+
+08. @sirmax how is it going with handshake timeout? Just let us know if you need any help with that.
+@sirmax handshake 시간제한 문제는 어떻게 되가고 있어요? 도움이 필요하면 우리한테 편하게 알려줘요.
+
+09. @sirmax you may have a look at this test. It also tests the SslHandler behaviour so you can use it as a start point.
+@sirmax 이 테스트를 보는 것도 좋을 것 같아요. 이것도 SslHandler behaviour 테스트인데 출발점으로 사용할 수 있을거에요.
+
+10. finagle-core: Set finite SSL handshake timeout. Fixes #345 #346
+finagle-core: SSL handshake 시간제한을 유한하게 설정했음. Fixes #345 #346
+
+
+# Rad
+An abbreviation of 'radical'--a term made popular by the Teenage Mutant Ninja Turtles.
+Still primarily used by people on the West Coast who find words like 'cool', 'awesome', and 'tight' to be tired and overused;
+'rad' is generally considered to be a much higher praise than the aforementioned superlatives.
+Also used as a general expression of awe.
+http://ko.urbandictionary.com/define.php?term=Rad

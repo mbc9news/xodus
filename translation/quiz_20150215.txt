@@ -1,0 +1,42 @@
+01. com.twitter.common 환경을 설명하는 질의응답 세션을 추가함.
+02. 오래 잊고 있던 자바 파일 삭제
+03. scrooge2 의존성 제거
+04. finagle 예제에 새로운 netty api를 사용함.
+05. finagle 문서 웨사이트의 finagle-websocket링크 수정함.
+06. finagle에서 compiled_idl를 제거함.
+07. TFinagleBinaryProtocol 추가
+08. com.twitter.finagle.Stack: 초기버전
+09. "com.twitter.finagle.Stack: initial version" 되돌림
+10. twitter.github.io/finagle를 가리키도록 finagle README를 수정함.
+
+
+
+01. adds a section to the FAQ explaining the com.twitter.common situation
+com.twitter.common 환경을 설명하는 질의응답 세션을 추가함.
+
+02. Remove a long-forgotten java file
+오래 잊고 있던 자바 파일 삭제
+
+03. remove scrooge2 dependency
+scrooge2 의존성 제거
+
+04. use new netty api in finagle example
+finagle 예제에 새로운 netty api를 사용함.
+
+05. Fix finagle-websocket link on Finagle docs website.
+finagle 문서 웨사이트의 finagle-websocket링크 수정함.
+
+06. Remove compiled_idl from finagle
+finagle에서 compiled_idl를 제거함.
+
+07. add TFinagleBinaryProtocol
+TFinagleBinaryProtocol 추가
+
+08. com.twitter.finagle.Stack: initial version
+com.twitter.finagle.Stack: 초기버전
+
+09. Revert "com.twitter.finagle.Stack: initial version"
+"com.twitter.finagle.Stack: initial version" 되돌림
+
+10. Update finagle README to point to twitter.github.io/finagle
+twitter.github.io/finagle를 가리키도록 finagle README를 수정함.

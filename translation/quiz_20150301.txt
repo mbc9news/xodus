@@ -1,0 +1,49 @@
+01. finagle-core: 모든 finagle 예외에 서비스명 추가
+02. 오래된 ostrich finagle 삭제
+03. duplex stream를 위해 offer/broker를 사용.
+04. 무한루프 회피함.
+05. kestrel 테스트 정렬 문제 수정함.
+06. release()가 확실히 한번만 호출되도록 atomic boolean를 사용함.
+07. 사용하지 않는 벤치마크 삭제.
+08. OSS라이브러리의 공개 버전을 패치함; sbt따라잡기
+09. Timer: 취소에 시간제한 추가.
+10. Ruben Oanta부터 MySQL codec 시작함.
+
+
+01. finagle-core: add serviceName to all finagle exceptions
+finagle-core: 모든 finagle 예외에 서비스명 추가
+https://github.com/twitter/finagle/commit/b33c45874e047ba6fe6b5c74e9dbfccbe6813117
+
+02. removing old ostrich finagle
+오래된 ostrich finagle 삭제
+
+03. [split] finagle-stream: use offer/broker for duplex stream
+duplex stream를 위해 offer/broker를 사용.
+
+04. [split] avoid infinit loop
+무한루프 회피함.
+https://github.com/twitter/finagle/commit/4925f4bd5750b2fc12f634fca4b17746003aa0be
+
+05. [split] fixing kestrel test ordering issues
+kestrel 테스트 정렬 문제 수정함.
+https://github.com/twitter/finagle/commit/684ac88f281bf4ce5810c6bbb80d5204e043d4bc
+
+06. [split] Use an atomic boolean to make sure release() only called once.
+release()가 확실히 한번만 호출되도록 atomic boolean를 사용함.
+https://github.com/twitter/finagle/commit/36693f59c2f5d5bfa53856537620a0b1e7bfa3dc
+
+07. kill obsolete benchmark
+사용하지 않는 벤치마크 삭제.
+https://github.com/twitter/finagle/commit/517f308a5efd3a9f216c044b1dd237e7bd170648
+
+08. patch public release of OSS libraries; catch up sbt
+OSS라이브러리의 공개 버전을 패치함; sbt따라잡기
+https://github.com/twitter/finagle/commit/048d153969ffb9b4e5fb8b067de30772e00330aa
+
+09. Timer: dispose timeouts on cancellation
+Timer: 취소에 시간제한 추가.
+https://github.com/twitter/finagle/commit/e3b60f8d6d5e88f13975dd415df50c4371a9e2f8
+
+10. MySQL codec from Ruben Oanta.
+Ruben Oanta부터 MySQL codec 시작함.
+https://github.com/twitter/finagle/commit/2adabf7d6d84f67a3db07a593c4b4ed8788a09ad

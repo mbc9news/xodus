@@ -1,0 +1,46 @@
+1. 전체 sbt 프로젝트 버전업
+2. 패키지 디렉토리 구분
+3. ResolutionRaceTest를 조금 더 확장함
+4. Addr 추가(자바 친화적인 Addr의 변수)
+5. enum 삭제, 명명 확장
+6. (util, ostrich, scoorge, twitter-server) sbt 프로젝트 정의 업데이트
+7. WeightedSocketAddressTest에서 loopback 주소를 사용함.
+8. request context 소개
+9. LoadService 실패 사례 케이스를 로그에 추가
+10. core class들 이름 변경, 파일 명확하게 구분.
+
+
+1. Bump all sbt projects
+전체 sbt 프로젝트 버전업
+
+2. split up into package dirs
+패키지 디렉토리 구분
+
+3. make ResolutionRaceTest more robust
+ResolutionRaceTest를 조금 더 확장함
+
+4. Add Addrs, a Java-friendly variant of Addr
+Addr 추가(자바 친화적인 Addr의 변수)
+
+5. removed enum/expand from Namer
+enum 삭제, 명명 확장
+
+6. Update sbt project definitions of (util, ostrich, scoorge, twitter-server)
+(util, ostrich, scoorge, twitter-server) sbt 프로젝트 정의 업데이트
+
+7. Use loopback address in WeightedSocketAddressTest
+WeightedSocketAddressTest에서 loopback 주소를 사용함.
+
+8. Introduce request contexts
+request context 소개
+
+9. Add log in case of instantiation failure in LoadService
+LoadService 실패 사례 케이스를 로그에 추가
+
+10. Rename core classes and separate them into distinct files
+core class들 이름 변경, 파일 명확하게 구분.
+
+
+# What does Bump Version stands for?
+It means to increment the version number to a new, unique value.
+http://stackoverflow.com/questions/4181185/what-does-bump-version-stands-for
