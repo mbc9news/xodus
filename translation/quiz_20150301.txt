@@ -47,3 +47,9 @@ https://github.com/twitter/finagle/commit/e3b60f8d6d5e88f13975dd415df50c4371a9e2
 10. MySQL codec from Ruben Oanta.
 Ruben Oanta부터 MySQL codec 시작함.
 https://github.com/twitter/finagle/commit/2adabf7d6d84f67a3db07a593c4b4ed8788a09ad
+
+
+# deprecated vs obsolete
+deprecated: 현재, 지원하긴 하지만 없어질 예정.
+obsolete:  당장 지원 보장없음.
+http://aboooks.tistory.com/378
