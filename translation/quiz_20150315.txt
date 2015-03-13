@@ -1,6 +1,6 @@
 01. SSLHandler에서 Netty3Transporter는 handshake 시간초과를 명확히 되어있지 않네요.
 02. 이렇게 설정된 채널이 handshake에 응답하지 않는 리모트와 TCP연결을 시도한다면, 그 채널은 connecting 상태로 무한정 머물러 있을 것입니다.
-03. 이건 다양한 문제를 일으킬 지도 모르는데 제가 알고 있는 한 가지는 FailFastFactory과 관련한 것이다.
+03. 이건 다양한 문제를 일으킬 지도 모르는데 제가 알고 있는 한 가지는 FailFastFactory와 관련한 것이다.
 04. FailFastFactory가 시간제한 설정 안한 연결을 시도하면, 리모트 서비스와 오래전에 재연결이 되었다고 해도 영구적인 fail-fast 상태로 들어갈 것입니다.
 05. 참조하세요. Netty4는 재설정할 수 있는 기본 handshake 시간제한이 10초이다.
 불행하게도 Netty3에서는 명시적으로 설정해야 합니다. multi-arg SSLHandler 생성자를 통해 설정하는 것이 유일한 방법이네요.
@@ -21,7 +21,7 @@ SSLHandler에서 Netty3Transporter는 handshake 시간초과를 명확히 되어
 이렇게 설정된 채널이 handshake에 응답하지 않는 리모트와 TCP연결을 시도한다면, 그 채널은 connecting 상태로 무한정 머물러 있을 것입니다.
 
 03. This may cause various problems. One that I'm aware of is with the FailFastFactory.
-이건 다양한 문제를 일으킬 지도 모르는데 제가 알고 있는 한 가지는 FailFastFactory과 관련한 것이다.
+이건 다양한 문제를 일으킬 지도 모르는데 제가 알고 있는 한 가지는 FailFastFactory와 관련한 것이다.
 
 04. When FailFastFactory tries to establish a connection it sets no timeouts on its own, thus it could be driven into a permanent fail-fast state, even if the connectivity with the remote service is long ago reestablished.
 FailFastFactory가 시간제한 설정 안한 연결을 시도하면, 리모트 서비스와 오래전에 재연결이 되었다고 해도 영구적인 fail-fast 상태로 들어갈 것입니다.
