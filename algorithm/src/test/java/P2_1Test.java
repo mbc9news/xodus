@@ -30,21 +30,21 @@ public class P2_1Test {
 
     @Test
     public void 중복_문자_제거(){
-        List<Character> result = P2_1.delDupData(srcList);
+        List<Character> result = xodus.algo.P2_1.delDupData(srcList);
 
         assertThat(srcList.size()-1, is(result.size()));
     }
 
     @Test
     public void 버퍼사용하지_말고_중복_문자_제거(){
-        List<Character> result = P2_1.delDupDataNoBuff(srcList);
+        List<Character> result = xodus.algo.P2_1.delDupDataNoBuff(srcList);
 
         assertThat(srcList.size()-1, is(result.size()));
     }
 
     @Test
     public void java8_중복_문자_제거() {
-        List<Character> result = P2_1.delDupDataStream(srcList);
+        List<Character> result = xodus.algo.P2_1.delDupDataStream(srcList);
 
         assertThat(srcList.size()-1, is(result.size()));
     }

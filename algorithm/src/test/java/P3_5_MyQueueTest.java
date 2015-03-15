@@ -8,7 +8,6 @@
 
 import org.junit.Test;
 
-import static org.junit.Assert.*;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
@@ -16,7 +15,7 @@ public class P3_5_MyQueueTest {
 
     @Test
     public void push순서와_pop순서는_같다(){
-        P3_5_MyQueue q = new P3_5_MyQueue();
+        xodus.algo.P3_5_MyQueue q = new xodus.algo.P3_5_MyQueue();
         q.push(1);
         q.push(2);
         q.push(3);
