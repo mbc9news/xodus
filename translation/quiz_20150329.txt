@@ -1,0 +1,44 @@
+01. 우리가 최근에 Finagle 6.24로 업그레이드한 이후로 발견한 것은 GET 연산을 구현한 memcached spans이 처음에는 좋아 보였는데(zipkin-web을 이용해서) 몇 분 후에 전체 추적을 갱신했을 때는 훨씬 길고 부정확한 주기를 보였다.
+02. 이게 말해주는 것은 memcached GET 연산 span들은 두번의 다른 속성을 가지고 나타난다는 것이다.
+03. 초기에는 특정한 annotations을 가질 것으로 생각했는데, memcached 필터에서 추가된 Hit 또는 Miss 커스텀 annotations을 누락하고 있다.
+04. span 주기 갱신이 잘못 업데이트되고 얼마 지나고 나서도, span 주기가 'Hit', 'Miss' annotation를 가지거나 `finagle.flush` anntations을 가진다.
+05. 마지막 사실이 말해주는 것은 데드라인에 도달할 때까지 span이 DeadLineSpanMap안에 있었다는 것이다.
+06. 코드를 좀 더 자세히 봤을때, 무슨 일이 일어났는지 알 것 같다.
+07. span에 `Client Received` 어노테이션이 설정되었을때, `DeadLineSpanMap`으로부터 수집/구독과 삭제가 예상대로 표시되었다.
+08. 하지만 그 이후, hit/miss 어노테이션을 나타내주는 memcached 필터가 적용된다.
+09. 이 때, `DeadlineSpanMap#update`가 실행된다.
+10. DeadlineSpanMap은 더 이상 그 map에서 추적 id를 찾지 못할 것이고 같은 id로 새로운 span을 생성할 것이다.(Trace + span + parent span id)
+
+
+
+memcached zipkin integration bug #343
+https://github.com/twitter/finagle/issues/343
+01. We recently noticed, since upgrading to Finagle 6.24, that memcached spans representing GET operations look fine initially (using zipkin-web) but when refreshing the full trace minutes later they have a much longer and incorrect duration.
+우리가 최근에 Finagle 6.24로 업그레이드한 이후로 발견한 것은 GET 연산을 구현한 memcached spans이 처음에는 좋아 보였는데(zipkin-web을 이용해서) 몇 분 후에 전체 추적을 갱신했을 때는 훨씬 길고 부정확한 주기를 보였다.
+
+02. This indicates that memcached GET operation spans are submitted twice with different properties.
+이게 말해주는 것은 memcached GET 연산 span들은 두번의 다른 속성을 가지고 나타난다는 것이다.
+
+03. Initially the spans have expected annotations but are lacking the Hit or Miss custom annotations that are added in the memcached filter.
+초기에는 특정한 annotations을 가질 것으로 생각했는데, memcached 필터에서 추가된 Hit 또는 Miss 커스텀 annotations을 누락하고 있다.
+
+04. After some time when refreshing the span durations are wrongly updated but they also have the 'Hit' or 'Miss' annotations AND `finagle.flush` annotations.
+span 주기 갱신이 잘못 업데이트되고 얼마 지나고 나서도, span 주기가 'Hit', 'Miss' annotation를 가지거나 `finagle.flush` anntations을 가진다.
+
+05. The last one indicates the span was in the DeadLineSpanMap till the deadline was reached.
+마지막 사실이 말해주는 것은 데드라인에 도달할 때까지 span이 DeadLineSpanMap안에 있었다는 것이다.
+
+06. When looking in more detail at the code I think I know what is happening.
+코드를 좀 더 자세히 봤을때, 무슨 일이 일어났는지 알 것 같다.
+
+07. When the `Client Received` annotation is set the span is submitted to the collector/scribe and removed from the `DeadLineSpanMap` as expected.
+span에 `Client Received` 어노테이션이 설정되었을때, `DeadLineSpanMap`으로부터 수집/구독과 삭제가 예상대로 표시되었다.
+
+08. However after that, the memcached filter kicks in which submits the hit / miss annotation.
+하지만 그 이후, hit/miss 어노테이션을 나타내주는 memcached 필터가 적용된다.
+
+09. When this happens `DeadlineSpanMap#update` is executed.
+이 때, `DeadlineSpanMap#update`가 실행된다.
+
+10. The DeadlineSpanMap won't find the trace id anymore in its map and will create a new Span with same id (Trace + span + parent span id).
+DeadlineSpanMap은 더 이상 그 map에서 추적 id를 찾지 못할 것이고 같은 id로 새로운 span을 생성할 것이다.(Trace + span + parent span id)
